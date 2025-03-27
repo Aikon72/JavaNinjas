@@ -5,12 +5,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-
 import java.time.Duration;
 
 import static org.testng.Assert.*;
 
-@Ignore
+@Test
 public class GroupJavaNinjasTest {
 
     WebDriver driver;
@@ -222,22 +221,21 @@ public class GroupJavaNinjasTest {
         driver.quit();
     }
     @Test
-    public void CPTest() throws InterruptedException {
+    public void testUnsuccessfulLogin() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://creaphoto.su");
-        WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div/div/div[4]/button[1]"));
-        submitButton.click();
+
+        driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div/div/div[4]/button[1]")).click();
         Thread.sleep( 1000 );
-        WebElement textBox = driver.findElement(By.tagName("input"));
-        textBox.sendKeys("Aikon");
-        submitButton = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[4]/button"));
-        submitButton.click();
+
+        driver.findElement(By.tagName("input")).sendKeys("Aikon");
+        driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[4]/button")).click();
         Thread.sleep( 1000 );
-        WebElement message = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[6]/div/span[2]"));
-        String value = message.getText();
-        assertEquals("Псевдоним или пароль - не корректны", value);
+
+        String value = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[6]/div/span[2]")).getText();
         driver.quit();
-    }
+        assertEquals("Псевдоним или пароль - не корректны", value);
+        }
 
     @AfterMethod
     public void teardown() {
