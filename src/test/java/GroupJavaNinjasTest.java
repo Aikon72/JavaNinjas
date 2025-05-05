@@ -222,6 +222,7 @@ public class GroupJavaNinjasTest {
     }
     @Test
     public void testUnsuccessfulLogin() throws InterruptedException {
+        //Сергей Буторин
         WebDriver driver = new ChromeDriver();
         driver.get("https://creaphoto.su");
 
@@ -234,7 +235,7 @@ public class GroupJavaNinjasTest {
 
         String value = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[6]/div/span[2]")).getText();
         driver.quit();
-        assertEquals("Псевдоним или пароль - не корректны", value);
+        assertEquals(value, "Псевдоним или пароль - не корректны");
         }
 
     @AfterMethod
