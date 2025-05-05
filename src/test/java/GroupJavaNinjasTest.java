@@ -6,17 +6,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import java.time.Duration;
-
 import static org.testng.Assert.*;
 
 @Test
 public class GroupJavaNinjasTest {
-
     WebDriver driver;
+    WebDriverWait wait;
 
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
@@ -93,7 +93,6 @@ public class GroupJavaNinjasTest {
         String data = dataPicker.getDomProperty("value");
         String selectDateText = "03/15/2025";
         assertEquals(data, selectDateText);
-        driver.quit();
     }
     //Alert
     @Test
@@ -115,7 +114,6 @@ public class GroupJavaNinjasTest {
         String alertText = alert.getText();
         System.out.println("Текст алерта: " + alertText);
         alert.accept();
-        driver.quit();
     }
     //Launch confirm
     @Test
@@ -143,7 +141,6 @@ public class GroupJavaNinjasTest {
             alert.dismiss();
             System.out.println("Нажата кнопка 'Отмена'");
         }
-        driver.quit();
     }
 
     @Test
@@ -161,7 +158,6 @@ public class GroupJavaNinjasTest {
         WebElement result = driver.findElement(By.className("_titleText_1s7by_15"));
         String resultText = result.getText();
         assertEquals(resultText, "Товары по запросу «куртка»");
-        driver.quit();
     }
 
     @Test
@@ -217,24 +213,21 @@ public class GroupJavaNinjasTest {
         String value = message.getText();
 
         assertEquals(value, "Received!");
-
-        driver.quit();
     }
     @Test
-    public void testUnsuccessfulLogin() throws InterruptedException {
-        //Сергей Буторин
-        WebDriver driver = new ChromeDriver();
+    public void testUnsuccessfulLogin() {
         driver.get("https://creaphoto.su");
 
-        driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/div/div/div[4]/button[1]")).click();
-        Thread.sleep( 1000 );
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[@id=\"root\"]/main/div/div/div/div/div[4]/button[1]"))).click();
 
-        driver.findElement(By.tagName("input")).sendKeys("Aikon");
-        driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[4]/button")).click();
-        Thread.sleep( 1000 );
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.tagName("input"))).sendKeys("Aikon");
+        wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[4]/button"))).click();
 
-        String value = driver.findElement(By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[6]/div/span[2]")).getText();
-        driver.quit();
+        String value = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[6]/div/span[2]"))).getText();
         assertEquals(value, "Псевдоним или пароль - не корректны");
         }
 
