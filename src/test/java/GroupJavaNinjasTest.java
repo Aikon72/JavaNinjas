@@ -16,10 +16,10 @@ public class GroupJavaNinjasTest {
     @BeforeMethod
     public void setup() {
         WebDriverManager.chromedriver().setup();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Test
