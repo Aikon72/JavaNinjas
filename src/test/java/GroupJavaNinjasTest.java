@@ -224,9 +224,9 @@ public class GroupJavaNinjasTest {
                 By.tagName("input"))).sendKeys("Aikon");
         wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[4]/button"))).click();
-
         String value = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//*[@id=\"root\"]/main/div/div/form/div/div[6]/div/span[2]"))).getText();
+
         assertEquals(value, "Псевдоним или пароль - не корректны");
         }
 
