@@ -220,7 +220,6 @@ public class GroupJavaNinjasTest {
 
         wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//*[@id=\"root\"]/main/div/div/div/div/div[4]/button[1]"))).click();
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.tagName("input"))).sendKeys("Aikon");
         wait.until(ExpectedConditions.elementToBeClickable(
