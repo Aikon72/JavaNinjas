@@ -24,7 +24,6 @@ public class CreaphotoTest {
         driver.manage().deleteAllCookies();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
     @Test
     public void testUnsuccessfulLogin() {
         driver.get("https://creaphoto.su");
